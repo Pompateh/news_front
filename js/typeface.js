@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let typefaces = [];
 
     // Fetch the typeface data from your new API endpoint
-    fetch('http://localhost:5000/api/typefaces')
+    fetch(`${config.backendUrl}/api/typefaces`)
         .then(response => {
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
         
                 // Check if the image URL is a relative path and prepend the backend URL
                 if (imageUrl && !imageUrl.startsWith('http') && !imageUrl.startsWith('data:')) {
-                    imageUrl = `http://localhost:5000/${imageUrl}`;
+                    imageUrl = `${config.backendUrl}/${imageUrl}`;
                 }
         
                 const card = document.createElement('div');
@@ -48,16 +48,14 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }
 
-    const showTypefaceDetail = (typefaceId) => {
-        const typeface = typefaces.find(t => t._id === typefaceId);
-        if (typeface) {
-            console.log('Showing typeface detail for:', typeface);
-            localStorage.setItem('currentTypeface', JSON.stringify(typeface));
-            window.location.href = `typeface-detail.html?id=${typeface._id}`;
-        } else {
-            console.error(`Typeface not found for id: ${typefaceId}`);
-        }
-    };
-
-    // Remove the addDatatoHTML function as it's no longer needed
-});
+        const showTypefaceDetail = (typefaceId) => {
+            const typeface = typefaces.find(t => t._id === typefaceId);
+            if (typeface) {
+                console.log('Showing typeface detail for:', typeface);
+                localStorage.setItem('currentTypeface', JSON.stringify(typeface));
+                window.location.href = `typeface-detail.html?id=${typeface._id}`;
+            } else {
+                console.error(`Typeface not found for id: ${typefaceId}`);
+            }
+        };
+    });

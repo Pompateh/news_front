@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const fetchBrands = async () => {
         try {
-            const response = await fetch('http://localhost:5000/api/brands');
+            const response = await fetch(`${config.backendUrl}/api/brands`);
             brands = await response.json();
             initializeBrand();
         } catch (error) {
@@ -23,7 +23,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const renderBrandDetail = () => {
         if (currentBrand) {
-            const baseUrl = 'http://localhost:5000/'; // Adjust this if your backend URL is different
             brandDetailContainer.innerHTML = `
                 <div class="detail_head">
                     <div class="detail_back"><a href="Brand.html" id="prevBrand">Back</a></div>
@@ -32,18 +31,18 @@ document.addEventListener('DOMContentLoaded', () => {
                 </div>
                 <div class="detail_content">
                     <div class="detail_main_img">
-                        <img src="${baseUrl}${currentBrand.image}" alt="${currentBrand.name}">
+                        <img src="${getImageUrl(currentBrand.image)}" alt="${currentBrand.name}">
                     </div>
                     <div class="brand_story">
                         <h3>Story</h3>
                         <p>${currentBrand.story || 'No story available for this brand.'}</p>
                     </div>
                     <div class="detail_img_grid">
-                        <img src="${baseUrl}${currentBrand.gridImage1}" alt="${currentBrand.name} Detail 1">
-                        <img src="${baseUrl}${currentBrand.gridImage2}" alt="${currentBrand.name} Detail 2">
+                        <img src="${getImageUrl(currentBrand.gridImage1)}" alt="${currentBrand.name} Detail 1">
+                        <img src="${getImageUrl(currentBrand.gridImage2)}" alt="${currentBrand.name} Detail 2">
                     </div>
                     <div class="detail_bottom_img">
-                        <img src="${baseUrl}${currentBrand.gridImage3}" alt="${currentBrand.name} Detail 3">
+                        <img src="${getImageUrl(currentBrand.gridImage3)}" alt="${currentBrand.name} Detail 3">
                     </div>
                 </div>
                 <div class="detail_end">
@@ -60,6 +59,11 @@ document.addEventListener('DOMContentLoaded', () => {
         } else {
             brandDetailContainer.innerHTML = '<p>Brand not found.</p>';
         }
+    };
+
+    const getImageUrl = (imagePath) => {
+        if (!imagePath) return './assets/placeholder-image.jpg';
+        return imagePath.startsWith('http') ? imagePath : `${config.backendUrl}/${imagePath}`;
     };
 
     const navigateToNext = (e) => {

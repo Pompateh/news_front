@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const fetchProducts = async () => {
         try {
-            const response = await fetch('http://localhost:5000/api/products');
+            const response = await fetch(`${config.backendUrl}/api/products`);
             products = await response.json();
             initializeProduct();
         } catch (error) {
@@ -23,7 +23,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const renderProductDetail = () => {
         if (currentProduct) {
-            const baseUrl = 'http://localhost:5000/'; // Adjust this if your backend URL is different
             productDetailContainer.innerHTML = `
                 <div class="detail_head">
                     <div class="detail_back"><a href="shop.html">Back</a></div>
@@ -32,18 +31,18 @@ document.addEventListener('DOMContentLoaded', () => {
                 </div>
                 <div class="detail_content">
                     <div class="detail_main_img">
-                        <img src="${baseUrl}${currentProduct.image}" alt="${currentProduct.name}">
+                        <img src="${config.backendUrl}/${currentProduct.image}" alt="${currentProduct.name}">
                     </div>
                     <div class="product_story">
                         <h3>Story</h3>
                         <p>${currentProduct.story || 'No story available for this product.'}</p>
                     </div>
                     <div class="detail_img_grid">
-                        <img src="${baseUrl}${currentProduct.image1}" alt="${currentProduct.name} Detail 1">
-                        <img src="${baseUrl}${currentProduct.image2}" alt="${currentProduct.name} Detail 2">
+                        <img src="${config.backendUrl}/${currentProduct.image1}" alt="${currentProduct.name} Detail 1">
+                        <img src="${config.backendUrl}/${currentProduct.image2}" alt="${currentProduct.name} Detail 2">
                     </div>
                     <div class="detail_bottom_img">
-                        <img src="${baseUrl}${currentProduct.image3}" alt="${currentProduct.name} Detail 3">
+                        <img src="${config.backendUrl}/${currentProduct.image3}" alt="${currentProduct.name} Detail 3">
                     </div>
                 </div>
                 <div class="detail_end">

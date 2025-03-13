@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const fetchIllustrations = async () => {
         try {
-            const response = await fetch('http://localhost:5000/api/illustrations');
+            const response = await fetch(`${config.backendUrl}/api/illustrations`);
             illustrations = await response.json();
             initializeIllustration();
         } catch (error) {
@@ -22,7 +22,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const renderIllustrationDetail = () => {
         if (currentIllustration) {
-            const baseUrl = 'http://localhost:5000/'; // Adjust this if your backend URL is different
             console.log('Current Illustration:', currentIllustration); // Log the current illustration object
     
             illustrationDetailContainer.innerHTML = `
@@ -33,18 +32,18 @@ document.addEventListener('DOMContentLoaded', () => {
                 </div>
                 <div class="detail_content">
                     <div class="detail_main_img">
-                        <img src="${baseUrl}${currentIllustration.image}" alt="${currentIllustration.name}" onerror="this.onerror=null; this.src='path/to/placeholder.jpg'; console.error('Failed to load image:', this.src);">
+                        <img src="${config.backendUrl}/${currentIllustration.image}" alt="${currentIllustration.name}" onerror="this.onerror=null; this.src='path/to/placeholder.jpg'; console.error('Failed to load image:', this.src);">
                     </div>
                     <div class="story">
                         <h2>Story</h2>
                         <p>${currentIllustration.story || 'No story available for this illustration.'}</p>
                     </div>
                     <div class="detail_img_grid">
-                        <img src="${baseUrl}${currentIllustration.image1}" alt="${currentIllustration.name} Detail 1" onerror="this.onerror=null; this.src='path/to/placeholder.jpg'; console.error('Failed to load gridImage1:', this.src);">
-                        <img src="${baseUrl}${currentIllustration.image2}" alt="${currentIllustration.name} Detail 2" onerror="this.onerror=null; this.src='path/to/placeholder.jpg'; console.error('Failed to load gridImage2:', this.src);">
+                        <img src="${config.backendUrl}/${currentIllustration.image1}" alt="${currentIllustration.name} Detail 1" onerror="this.onerror=null; this.src='path/to/placeholder.jpg'; console.error('Failed to load gridImage1:', this.src);">
+                        <img src="${config.backendUrl}/${currentIllustration.image2}" alt="${currentIllustration.name} Detail 2" onerror="this.onerror=null; this.src='path/to/placeholder.jpg'; console.error('Failed to load gridImage2:', this.src);">
                     </div>
                     <div class="detail_bottom_img">
-                        <img src="${baseUrl}${currentIllustration.image3}" alt="${currentIllustration.name} Detail 3" onerror="this.onerror=null; this.src='path/to/placeholder.jpg'; console.error('Failed to load gridImage3:', this.src);">
+                        <img src="${config.backendUrl}/${currentIllustration.image3}" alt="${currentIllustration.name} Detail 3" onerror="this.onerror=null; this.src='path/to/placeholder.jpg'; console.error('Failed to load gridImage3:', this.src);">
                     </div>
                 </div> 
                 <div class="detail_end">

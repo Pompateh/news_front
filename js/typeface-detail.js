@@ -1,22 +1,20 @@
+
 document.addEventListener('DOMContentLoaded', () => {
     const typefaceDetailContainer = document.getElementById('typeface-detail');
     let currentTypeface;
     let typefaces = [];
-    // Keep track of the current carousel page (each page shows 2 images)
     let carouselIndex = 0;
-    const pageSize = 2; // number of images per carousel page
+    const pageSize = 2;
 
-    // Add cache busting parameter to force fresh data from the API.
     const fetchTypefaces = async () => {
         try {
-            const response = await fetch('http://localhost:5000/api/typefaces?timestamp=' + new Date().getTime(), { cache: 'no-cache' });
+            const response = await fetch(`${config.backendUrl}/api/typefaces?timestamp=${new Date().getTime()}`, { cache: 'no-cache' });
             typefaces = await response.json();
             initializeTypeface();
         } catch (error) {
             console.error('Error fetching typefaces:', error);
         }
     };
-
     const initializeTypeface = () => {
         const urlParams = new URLSearchParams(window.location.search);
         const typefaceId = urlParams.get('id');
@@ -42,7 +40,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const start = carouselIndex * pageSize;
                 const currentImages = images.slice(start, start + pageSize)
                     .map(img => {
-                        const src = img.startsWith('http') ? img : 'http://localhost:5000/' + img;
+                        const src = img.startsWith('http') ? img : `${config.backendUrl}/${img}`;
                         return `<img src="${src}" alt="${currentTypeface.name} Detail" style="max-width:48%; margin-right:2%;">`;
                     })
                     .join('');
@@ -164,7 +162,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     if (imgContainer) {
                         imgContainer.innerHTML = images.slice(carouselIndex * pageSize, carouselIndex * pageSize + pageSize)
                             .map(img => {
-                                const src = img.startsWith('http') ? img : 'http://localhost:5000/' + img;
+                                const src = img.startsWith('http') ? img : `${config.backendUrl}/${img}`;
                                 return `<img src="${src}" alt="${currentTypeface.name} Detail" style="max-width:48%; margin-right:2%;">`;
                             }).join('');
                     }

@@ -21,7 +21,7 @@ closeCart.addEventListener('click', () => {
 // Function to render product list
 const fetchProducts = async () => {
     try {
-        const response = await fetch('http://localhost:5000/api/products');
+        const response = await fetch(`${config.backendUrl}/api/products`);
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
@@ -43,7 +43,7 @@ const addDatatoHTML = () => {
     
             // Check if the image URL is a relative path and prepend the backend URL
             if (imageUrl && !imageUrl.startsWith('http') && !imageUrl.startsWith('data:')) {
-                imageUrl = `http://localhost:5000/${imageUrl}`;
+                imageUrl = `${config.backendUrl}/${imageUrl}`;
             }
 
             let newProduct = document.createElement('div');
@@ -184,9 +184,12 @@ const adjustCartQuantity = (product_id, change) => {
     addCartToMemory();
 }
 
+const backendUrl = (typeof config !== 'undefined' && config.backendUrl) 
+    ? config.backendUrl 
+    : 'https://newstalgia-backend-b62564c52cae.herokuapp.com';
 // Initialize the app and fetch products
 const initApp = () => {
-    fetch('http://localhost:5000/api/products')
+    fetch(`${backendUrl}/api/products`)
         .then(response => response.json())
         .then(data => {
             listProducts = data;

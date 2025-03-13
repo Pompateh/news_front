@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Fetch the brand data
-    fetch('http://localhost:5000/api/brands')
+    fetch(`${config.backendUrl}/api/brands`)
         .then(response => {
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
     
                 // Check if the image URL is a relative path and prepend the backend URL
                 if (imageUrl && !imageUrl.startsWith('http') && !imageUrl.startsWith('data:')) {
-                    imageUrl = `http://localhost:5000/${imageUrl}`;
+                    imageUrl = `${config.backendUrl}/${imageUrl}`;
                 }
     
                 const card = document.createElement('div');
