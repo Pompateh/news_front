@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Fetch products from backend API
     const fetchProducts = () => {
-        fetch('${config.backendUrl}/api/products')
+        fetch(`${config.backendUrl}/api/products`)
             .then(response => {
                 if (!response.ok) throw new Error('Network response was not ok');
                 return response.json();
