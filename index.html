@@ -1,222 +1,516 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Newstalgia</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Literata:ital,opsz,wght@0,7..72,200..900;1,7..72,200..900&family=Oswald:wght@200..700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/mainnew.css">
-    <style>
-        /* Preloader Styles */
-        #preloader {
-            position: fixed;
-            width: 100%;
-            height: 100vh;
-            background: #000;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            transition: opacity 0.8s ease-out, visibility 0.8s ease-out;
-            z-index: 9999;
-        }
-    
-        .preloader-content {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-    
-        #preloader img {
-            width: 200px;
-            animation: fadeZoom 2.5s ease-in-out forwards;
-            margin-bottom: 20px; /* Add space between logo and spinner */
-        }
-    
-    
-        @keyframes fadeZoom {
-            0% {
-                opacity: 0;
-                transform: scale(0.8);
-            }
-            40% {
-                opacity: 1;
-                transform: scale(1);
-            }
-            80% {
-                opacity: 1;
-                transform: scale(1);
-            }
-            100% {
-                opacity: 0;
-                transform: scale(1.1);
-            }
-        }
-    
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-    
-        /* Hide preloader after animation */
-        .hide-preloader {
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Newstalgia</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Literata:ital,opsz,wght@0,7..72,200..900;1,7..72,200..900&family=Oswald:wght@200..700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/mainnew.css" />
+  <style>
+    /* Basic reset and typography */
+    body {
+      margin: 0;
+      padding: 0;
+      background: #fff;
+      color: #000;
+      font-family: 'Oswald', sans-serif;
+    }
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+    /* Split layout styling */
+    .split-container {
+      display: flex;
+      min-height: 100vh;
+    }
+    .left-side, .right-side {
+      flex: 1;
+      padding: 40px;
+      box-sizing: border-box;
+    }
+    /* Left Side: Branding and Studio Info */
+    .left-side {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 40px;
+    box-sizing: border-box;
+  }
+
+
+  .logo img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  .studio-logo {
+    padding-top: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* This will center the image horizontally */
+  }
+
+  .studio-info img {
+    height: 415px;
+    width: 100%;
+    object-fit: contain; /* This ensures the image maintains its aspect ratio */
+    display: block; /* This removes any extra space below the image */
+    margin: 0 auto; /* This centers the image horizontally if it's smaller than its container */
+  }
+
+  .studio-name{
+    border-top: 1px solid #000;
+    border-bottom: 2px solid #000;
+    font-family: 'Literata';
+font-style: normal;
+font-weight: 500;
+font-size: 18px;
+line-height: 120%;
+padding: 10px 0; /* Add padding to top and bottom */
+
+  }
+
+
+  .hours {
+    display: flex;
+    justify-content: space-between;
+    font-family: 'Literata';
+font-style: normal;
+font-weight: 500;
+font-size: 18px;
+line-height: 120%;
+    margin-bottom: 20px;
+    margin-top: 20px;
+  }
+
+  .description p {
+    font-family: 'Literata', serif;
+    font-style: normal;
+font-weight: 400;
+font-size: 20px;
+line-height: 24px;
+margin-top: 20px;
+margin-bottom: 10px;
+  }
+
+  .cta {
+    text-align: right;
+    margin-top: 20px;
+    position: relative;
+    overflow: hidden; /* Hide overflow */
+    width: 100%; /* Full width of parent */
+}
+
+.cta a {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 24px;
+    text-decoration: none;
+    color: #000;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end; /* Align contents to the right */
+    width: 100%; /* Full width */
+}
+
+.cta-arrow {
+    position: relative;
+    width: 757px;
+    height: 2px;
+    background-color: #000;
+    margin-right: 20px;
+    transition: width 0.3s ease;
+    flex-shrink: 0; /* Prevent arrow from shrinking */
+}
+
+.cta-arrow::after {
+    content: '';
+    position: absolute;
+    right: -2px;
+    top: 50%;
+    transform: translateY(-50%) rotate(45deg);
+    width: 10px;
+    height: 10px;
+    border-top: 2px solid #000;
+    border-right: 2px solid #000;
+}
+
+.cta-text {
+    position: relative;
+    white-space: nowrap; /* Prevent text wrapping */
+}
+
+.cta-text::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -2px;
+    width: 100%;
+    height: 1px;
+    background-color: #000;
+    transition: width 0.3s ease;
+}
+
+.cta a:hover .cta-arrow {
+    width: 350px;
+}
+
+.cta a:hover .cta-text::after {
+    width: 0;
+}
+
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .left-side {
+      align-items: center;
+    }
+
+    .content-wrapper {
+      width: 100%;
+    }
+  }
+  .right-side {
+  display: flex;
+  flex-direction: column;
+  padding: 40px;
+}
+
+.nav-menu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.nav-menu ul li {
+  margin: 10px 0;
+  border-bottom: 1px solid #000;
+  padding-bottom: 5px;
+}
+
+.nav-menu ul li:last-child {
+  border-bottom: none;
+}
+
+.nav-menu ul li a {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-decoration: none;
+  color: #000;
+}
+
+.menu-item {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 36px;
+  letter-spacing: 1px;
+  flex-grow: 1;
+  text-align: center;
+  order: 2;
+}
+
+.menu-status {
+  font-family: 'Literata', serif;
+  font-size: 14px;
+  width: 60px;
+  text-align: left;
+  order: 1;
+}
+
+.menu-open {
+  font-family: 'Literata', serif;
+  font-size: 14px;
+  width: 60px;
+  text-align: right;
+  order: 3;
+}
+
+.nav-menu ul li:last-child .menu-status,
+.nav-menu ul li:last-child .menu-open {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .right-side {
+    align-items: center;
+    margin-top: 30px;
+  }
+
+  .nav-menu ul li a {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .menu-item {
+    font-size: 24px;
+    margin: 5px 0;
+  }
+
+  .menu-status, .menu-open {
+    font-size: 12px;
+    margin: 2px 0;
+    width: auto;
+  }
+}
+
+.news-image {
+  display: none;
+  max-width: 100%;
+  height: 0;
+  overflow: hidden;
+  transition: height 0.3s ease;
+}
+
+.news-image.active {
+  display: block;
+}
+
+.news-image img {
+  width: 100%;
+  height: auto;
+}
+
+#preloader {
+        position: fixed;
+        width: 100%;
+        height: 100vh;
+        background: #000;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition: opacity 0.8s ease-out, visibility 0.8s ease-out;
+        z-index: 9999;
+    }
+
+    .preloader-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    #preloader img {
+        width: 200px;
+        animation: fadeZoom 2.5s ease-in-out forwards;
+        margin-bottom: 20px;
+    }
+
+    @keyframes fadeZoom {
+        0% {
             opacity: 0;
-            visibility: hidden;
+            transform: scale(0.8);
         }
-    
-        /* Main content transition */
-        #main-content {
+        40% {
+            opacity: 1;
+            transform: scale(1);
+        }
+        80% {
+            opacity: 1;
+            transform: scale(1);
+        }
+        100% {
+            opacity: 0;
+            transform: scale(1.1);
+        }
+    }
+
+    .hide-preloader {
+        opacity: 0;
+        visibility: hidden;
+    }
+
+    /* Main content transition */
+    #main-content {
     opacity: 0;
     transition: opacity 0.5s ease-in-out;
+    display: none; /* Initially hidden */
 }
-    
-        #main-content.show {
-            opacity: 1;
-        }
 
-        #main-content.instant-show {
-        opacity: 1;
-        transition: none;
-    }
-    </style>
+#main-content.show {
+    opacity: 1;
+    display: flex; /* Show when this class is added */
+}
+
+#main-content.instant-show {
+    opacity: 1;
+    display: flex;
+    transition: none; /* No transition for instant show */
+}
+  </style>
 </head>
-
-<body style="background-color: #FED400;">
-    
-<!-- Preloader -->
-<div id="preloader" style="display: none;">
+<body>
+  <div id="preloader">
     <div class="preloader-content">
-        <img src="./assets/logo-02.png" alt="Logo">
+      <img src="./assets/logo-02.png" alt="Logo">
     </div>
-</div>
-    <!-- Main Content -->
-    <div class="container" id="main-content" style="display: none;">
-        <div class="page-width header_demo">
-            <div class="logo">
-                <a href="index.html">
-                    <img src="./assets/logo-01.png" alt="Logo">
-                </a>
-            </div>
-            <nav class="nav-bar">
-                <ul>
-                    <li><a href="Brand.html"><span>BRAND</span></a></li>
-                    <li><a href="Typeface.html"><span>TYPE</span></a></li>
-                    <li><a href="Illustration.html"><span>ILLUSTRATION</span></a></li>
-                    <li><a href="shop.html"><span>SHOP</span></a></li>
-                    <li><a href="#"><span>WORK WITH US</span></a></li>
-                    <li><a href="process.html"><span>PROCESS</span></a></li>
-                    <li><a href="aboutus.html"><span>ABOUT</span></a></li>
-                </ul>
-            </nav>
-            <div class="hamburger">
-                <div class="line"></div>
-                <div class="line"></div>
-                <div class="line"></div>
-            </div>
-        </div>
+  </div>
 
-        <div class="page-width">
-            <div class="image-grid">
-                <div class="grid-item large">
-                    <img src="./assets/image/NEWSTALGIA WEB-09.png"alt="Munchies Box Open" class="grid-img">
-                </div>
-                <div class="grid-item medium">
-                    <img src="./assets/image/NEWSTALGIA WEB-09.png" alt="Munchies Boxes" class="grid-img">
-                </div>
-                <div class="grid-item small">
-                    <div class="sub-item"><img src="./assets/image/NEWSTALGIA WEB-09.png" class="grid-img"></div>
-                    <div class="sub-item"><img src="./assets/image/NEWSTALGIA WEB-09.png" class="grid-img"></div>
-                </div>
+  <div id="main-content">
+    <div class="split-container">
+      <!-- Left Side: Branding & Studio Information -->
+  <!-- Left Side: Branding & Studio Information -->
+  <div class="left-side">
+      <div class="content-wrapper">
+        <!-- Main logo -->
+        <div class="logo">
+          <img src="./assets/logo-01.png" alt="Newstalgia Logo" />
+        </div>
+        <!-- Studio logo and information -->
+        <div class="studio-info">
+          <img src="./assets/Untitled.png" alt="Newstalgia Studio Logo" class="studio-logo" />
+          <div class="hours">
+            <span>Open: 09 am</span>
+            <span>Close: 10 pm</span>
+          </div>
+          <div class="studio-name">Newstalgia Studio</div>
+          <div class="description">
+            <p>Newstalgia is a creative and design studio based in Vietnam. We provide branding solutions, produce design and products created by our studio. We hope to become a valuable part of your journey!</p>
+          </div>
+          <!-- Call-to-Action -->
+          <div class="cta">
+              <a href="contact.html">
+              <span class="cta-arrow"></span>
+              <span class="cta-text">Visit Studio</span>
+              </a>
             </div>
         </div>
-
-        <div class="index-footer">
-            <div class="page-width">
-                <div class="index-footer-items">
-                    <div class="footer-item">
-                        <h1 class="h1">MUNCHIES BOX</h1>
-                    </div>
-                    <div class="footer-item footer-item-last">
-                        <p>Published: January 26th 2022</p>
-                    </div>
-                </div>
-            </div>
-        </div>
+      </div>
     </div>
+  
+      <!-- Right Side: Navigation Menu -->
+      <div class="right-side">
+          <nav class="nav-menu">
+            <ul>
+              <li>
+                <a href="Brand.html"><span class="menu-status">News</span><span class="menu-item">Branding</span><span class="menu-open">Open</span></a>
+                <div class="news-image" data-category="Branding"></div>
+              </li>
+              <li>
+                <a href="Typeface.html"><span class="menu-status">News</span><span class="menu-item">Typeface</span><span class="menu-open">Open</span></a>
+                <div class="news-image" data-category="Typeface"></div>
+              </li>
+              <li>
+                <a href="Illustration.html"><span class="menu-status">News</span><span class="menu-item">Illustration</span><span class="menu-open">Open</span></a>
+                <div class="news-image" data-category="Illustration"></div>
+              </li>
+              <li>
+                <a href="shop.html"><span class="menu-status">News</span><span class="menu-item">Merch</span><span class="menu-open">Open</span></a>
+                <div class="news-image" data-category="Merch"></div>
+              </li>
+              <li><a href="aboutus.html"><span class="menu-item">Contact</span></a></li>
+            </ul>
+          </nav>
+        </div>
+  </div>
 
-    <script type="text/javascript" src="js/header.js"></script>
-    <script>
+  <!-- Optional: If you have JS for page transitions, include here -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const newsItems = document.querySelectorAll('.menu-status');
+      const newsImages = {
+        'Branding': './assets/Untitled2.png',
+        'Typeface': './assets/Untitled2.png',
+        'Illustration': './assets/Untitled2.png',
+        'Merch': './assets/Untitled2.png'
+      };
+    
+      newsItems.forEach(item => {
+        item.addEventListener('click', function(e) {
+          e.preventDefault();
+          const category = this.nextElementSibling.textContent;
+          const listItem = this.closest('li');
+          const imageContainer = listItem.querySelector('.news-image');
+    
+          // Close all other open images
+          document.querySelectorAll('.news-image.active').forEach(img => {
+            if (img !== imageContainer) {
+              img.classList.remove('active');
+              img.style.height = '0px';
+              img.innerHTML = '';
+            }
+          });
+    
+          // Toggle the clicked image
+          if (imageContainer.classList.contains('active')) {
+            imageContainer.classList.remove('active');
+            imageContainer.style.height = '0px';
+            imageContainer.innerHTML = '';
+          } else {
+            imageContainer.classList.add('active');
+            const img = new Image();
+            img.onload = function() {
+              imageContainer.innerHTML = '';
+              imageContainer.appendChild(img);
+              imageContainer.style.height = img.height + 'px'; // Only image height
+            };
+            img.src = newsImages[category];
+            img.alt = `${category} News`;
+          }
+        });
+      });
+    });
+    </script>
+<script>
 window.addEventListener("load", function () {
     let preloader = document.getElementById("preloader");
     let mainContent = document.getElementById("main-content");
 
-    // Check if preloader has been shown before
-    if (!localStorage.getItem('preloaderShown')) {
+    // Check if this is the first visit
+    if (!sessionStorage.getItem('firstVisit')) {
+        // First visit
         preloader.style.display = "flex";
         setTimeout(() => {
             preloader.classList.add("hide-preloader");
             setTimeout(() => {
                 preloader.style.display = "none";
                 showMainContent(false);
-                // Set flag in localStorage
-                localStorage.setItem('preloaderShown', 'true');
+                // Set the flag in sessionStorage
+                sessionStorage.setItem('firstVisit', 'true');
             }, 800);
         }, 2500);
     } else {
-        // If preloader has been shown before, show main content immediately
+        // Not the first visit
+        preloader.style.display = "none";
         showMainContent(true);
     }
 });
 
 function showMainContent(instant) {
     let mainContent = document.getElementById("main-content");
-    mainContent.style.display = "block";
+    mainContent.style.display = "flex";
     
     if (instant) {
+        mainContent.style.opacity = "1";
         mainContent.classList.add("instant-show");
     } else {
         mainContent.style.opacity = "0";
-        setTimeout(() => {
-            mainContent.classList.add("show");
-        }, 50);
-    }
-}
-        
-        function updateImage() {
-            const img = document.getElementById('responsive-img');
-            const width = window.innerWidth;
-        
-            if (width <= 768) {
-                img.src = './assets/image/NEWSTALGIA WEB-10.png';
-            } else if (width <= 1440) {
-                img.src = './assets/image/NEWSTALGIA WEB-01.png';
-            } else {
-                img.src = './assets/image/NEWSTALGIA WEB-01.png';
-            }
-        }
-        
-        window.addEventListener('resize', updateImage);
-        window.addEventListener('load', updateImage);
-        
-        // Add this function to handle page transitions
-        function handlePageTransition() {
-            let mainContent = document.getElementById("main-content");
-            mainContent.style.opacity = "0";
-            setTimeout(() => {
-                // This timeout allows the fade-out effect to complete before navigating
-                window.location.href = this.getAttribute('href');
-            }, 500);
-        }
-        
-        // Add click event listeners to all internal links
-        document.querySelectorAll('a[href^="/"]:not([href^="//"])').forEach(link => {
-            link.addEventListener('click', function(e) {
-                e.preventDefault();
-                handlePageTransition.call(this);
+        requestAnimationFrame(() => {
+            requestAnimationFrame(() => {
+                mainContent.style.opacity = "1";
+                mainContent.classList.add("show");
             });
         });
-        </script>
-        <script src="js/config.js"></script>
+    }
+}
+  function handlePageTransition() {
+      let mainContent = document.getElementById("main-content");
+      mainContent.style.opacity = "0";
+      setTimeout(() => {
+          // This timeout allows the fade-out effect to complete before navigating
+          window.location.href = this.getAttribute('href');
+      }, 500);
+  }
+  
+  // Add click event listeners to all internal links
+  document.querySelectorAll('a[href^="/"]:not([href^="//"])').forEach(link => {
+      link.addEventListener('click', function(e) {
+          e.preventDefault();
+          handlePageTransition.call(this);
+      });
+  });
+  </script>
+  <script src="js/header.js"></script>
+  <script src="js/config.js"></script>
 </body>
 </html>
+
