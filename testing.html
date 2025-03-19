@@ -271,65 +271,138 @@ margin-bottom: 10px;
   height: auto;
 }
 
+#preloader {
+        position: fixed;
+        width: 100%;
+        height: 100vh;
+        background: #000;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition: opacity 0.8s ease-out, visibility 0.8s ease-out;
+        z-index: 9999;
+    }
 
+    .preloader-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    #preloader img {
+        width: 200px;
+        animation: fadeZoom 2.5s ease-in-out forwards;
+        margin-bottom: 20px;
+    }
+
+    @keyframes fadeZoom {
+        0% {
+            opacity: 0;
+            transform: scale(0.8);
+        }
+        40% {
+            opacity: 1;
+            transform: scale(1);
+        }
+        80% {
+            opacity: 1;
+            transform: scale(1);
+        }
+        100% {
+            opacity: 0;
+            transform: scale(1.1);
+        }
+    }
+
+    .hide-preloader {
+        opacity: 0;
+        visibility: hidden;
+    }
+
+    /* Main content transition */
+    #main-content {
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+    display: none; /* Initially hidden */
+}
+
+#main-content.show {
+    opacity: 1;
+    display: flex; /* Show when this class is added */
+}
+
+#main-content.instant-show {
+    opacity: 1;
+    display: flex;
+    transition: none; /* No transition for instant show */
+}
   </style>
 </head>
 <body>
-  <div class="split-container">
-    <!-- Left Side: Branding & Studio Information -->
-<!-- Left Side: Branding & Studio Information -->
-<div class="left-side">
-    <div class="content-wrapper">
-      <!-- Main logo -->
-      <div class="logo">
-        <img src="./assets/logo-01.png" alt="Newstalgia Logo" />
-      </div>
-      <!-- Studio logo and information -->
-      <div class="studio-info">
-        <img src="./assets/Untitled.png" alt="Newstalgia Studio Logo" class="studio-logo" />
-        <div class="hours">
-          <span>Open: 09 am</span>
-          <span>Close: 10 pm</span>
-        </div>
-        <div class="studio-name">Newstalgia Studio</div>
-        <div class="description">
-          <p>Newstalgia is a creative and design studio based in Vietnam. We provide branding solutions, produce design and products created by our studio. We hope to become a valuable part of your journey!</p>
-        </div>
-        <!-- Call-to-Action -->
-        <div class="cta">
-            <a href="contact.html">
-            <span class="cta-arrow"></span>
-            <span class="cta-text">Visit Studio</span>
-            </a>
-          </div>
-      </div>
+  <div id="preloader">
+    <div class="preloader-content">
+      <img src="./assets/logo-02.png" alt="Logo">
     </div>
   </div>
 
-    <!-- Right Side: Navigation Menu -->
-    <div class="right-side">
-        <nav class="nav-menu">
-          <ul>
-            <li>
-              <a href="Brand.html"><span class="menu-status">News</span><span class="menu-item">Branding</span><span class="menu-open">Open</span></a>
-              <div class="news-image" data-category="Branding"></div>
-            </li>
-            <li>
-              <a href="Typeface.html"><span class="menu-status">News</span><span class="menu-item">Typeface</span><span class="menu-open">Open</span></a>
-              <div class="news-image" data-category="Typeface"></div>
-            </li>
-            <li>
-              <a href="Illustration.html"><span class="menu-status">News</span><span class="menu-item">Illustration</span><span class="menu-open">Open</span></a>
-              <div class="news-image" data-category="Illustration"></div>
-            </li>
-            <li>
-              <a href="shop.html"><span class="menu-status">News</span><span class="menu-item">Merch</span><span class="menu-open">Open</span></a>
-              <div class="news-image" data-category="Merch"></div>
-            </li>
-            <li><a href="aboutus.html"><span class="menu-item">Contact</span></a></li>
-          </ul>
-        </nav>
+  <div id="main-content">
+    <div class="split-container">
+      <!-- Left Side: Branding & Studio Information -->
+  <!-- Left Side: Branding & Studio Information -->
+  <div class="left-side">
+      <div class="content-wrapper">
+        <!-- Main logo -->
+        <div class="logo">
+          <img src="./assets/logo-01.png" alt="Newstalgia Logo" />
+        </div>
+        <!-- Studio logo and information -->
+        <div class="studio-info">
+          <img src="./assets/Untitled.png" alt="Newstalgia Studio Logo" class="studio-logo" />
+          <div class="hours">
+            <span>Open: 09 am</span>
+            <span>Close: 10 pm</span>
+          </div>
+          <div class="studio-name">Newstalgia Studio</div>
+          <div class="description">
+            <p>Newstalgia is a creative and design studio based in Vietnam. We provide branding solutions, produce design and products created by our studio. We hope to become a valuable part of your journey!</p>
+          </div>
+          <!-- Call-to-Action -->
+          <div class="cta">
+              <a href="contact.html">
+              <span class="cta-arrow"></span>
+              <span class="cta-text">Visit Studio</span>
+              </a>
+            </div>
+        </div>
       </div>
+    </div>
+  
+      <!-- Right Side: Navigation Menu -->
+      <div class="right-side">
+          <nav class="nav-menu">
+            <ul>
+              <li>
+                <a href="Brand.html"><span class="menu-status">News</span><span class="menu-item">Branding</span><span class="menu-open">Open</span></a>
+                <div class="news-image" data-category="Branding"></div>
+              </li>
+              <li>
+                <a href="Typeface.html"><span class="menu-status">News</span><span class="menu-item">Typeface</span><span class="menu-open">Open</span></a>
+                <div class="news-image" data-category="Typeface"></div>
+              </li>
+              <li>
+                <a href="Illustration.html"><span class="menu-status">News</span><span class="menu-item">Illustration</span><span class="menu-open">Open</span></a>
+                <div class="news-image" data-category="Illustration"></div>
+              </li>
+              <li>
+                <a href="shop.html"><span class="menu-status">News</span><span class="menu-item">Merch</span><span class="menu-open">Open</span></a>
+                <div class="news-image" data-category="Merch"></div>
+              </li>
+              <li><a href="aboutus.html"><span class="menu-item">Contact</span></a></li>
+            </ul>
+          </nav>
+        </div>
+  </div>
+
   <!-- Optional: If you have JS for page transitions, include here -->
   <script>
     document.addEventListener('DOMContentLoaded', function() {
@@ -377,29 +450,65 @@ margin-bottom: 10px;
       });
     });
     </script>
-      <script>
-        window.addEventListener("load", function () {
-          let preloader = document.getElementById("preloader");
-          // Wrap existing content in a main-content div if needed
-          // Here we assume the entire body content (after the preloader) is the main content.
-          let mainContent = document.body; 
+<script>
+window.addEventListener("load", function () {
+    let preloader = document.getElementById("preloader");
+    let mainContent = document.getElementById("main-content");
+
+    // Check if this is the first visit
+    if (!sessionStorage.getItem('firstVisit')) {
+        // First visit
+        preloader.style.display = "flex";
+        setTimeout(() => {
+            preloader.classList.add("hide-preloader");
+            setTimeout(() => {
+                preloader.style.display = "none";
+                showMainContent(false);
+                // Set the flag in sessionStorage
+                sessionStorage.setItem('firstVisit', 'true');
+            }, 800);
+        }, 2500);
+    } else {
+        // Not the first visit
+        preloader.style.display = "none";
+        showMainContent(true);
+    }
+});
+
+function showMainContent(instant) {
+    let mainContent = document.getElementById("main-content");
+    mainContent.style.display = "flex";
     
-          if (!localStorage.getItem('preloaderShown')) {
-              preloader.style.display = "flex";
-              setTimeout(() => {
-                  preloader.classList.add("hide-preloader");
-                  setTimeout(() => {
-                      preloader.style.display = "none";
-                      // Remove preloader class to allow main content to show
-                      mainContent.classList.add("show");
-                      localStorage.setItem('preloaderShown', 'true');
-                  }, 800);
-              }, 2500);
-          } else {
-              mainContent.classList.add("instant-show");
-          }
+    if (instant) {
+        mainContent.style.opacity = "1";
+        mainContent.classList.add("instant-show");
+    } else {
+        mainContent.style.opacity = "0";
+        requestAnimationFrame(() => {
+            requestAnimationFrame(() => {
+                mainContent.style.opacity = "1";
+                mainContent.classList.add("show");
+            });
         });
-      </script>
+    }
+}
+  function handlePageTransition() {
+      let mainContent = document.getElementById("main-content");
+      mainContent.style.opacity = "0";
+      setTimeout(() => {
+          // This timeout allows the fade-out effect to complete before navigating
+          window.location.href = this.getAttribute('href');
+      }, 500);
+  }
+  
+  // Add click event listeners to all internal links
+  document.querySelectorAll('a[href^="/"]:not([href^="//"])').forEach(link => {
+      link.addEventListener('click', function(e) {
+          e.preventDefault();
+          handlePageTransition.call(this);
+      });
+  });
+  </script>
   <script src="js/header.js"></script>
   <script src="js/config.js"></script>
 </body>
